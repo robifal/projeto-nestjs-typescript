@@ -10,4 +10,24 @@ export class CatsService {
         return this.cats;
     }
 
+    create(cat: Cat): void {
+        this.cats.push(cat);
+    }
+
+    findById(id: number): Cat {
+        return this.cats.find(cat => cat.id === id);
+    }
+
+    findIndexById(id: number): number {
+        return this.cats.findIndex(cat => cat.id === id);
+    }
+
+    deleteByIndex(index: number): void {
+        this.cats.splice(index, 1);
+    }
+
+    update(index: number, cat: Cat): void {
+        this.cats.splice(index, 1, cat);
+    }
+
 }
