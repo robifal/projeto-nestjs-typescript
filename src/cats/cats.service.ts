@@ -1,33 +1,40 @@
 import { Injectable } from '@nestjs/common';
-import { Cat } from './interfaces/cat.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Cat } from './cat.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class CatsService {
+export class CatsService{
+constructor(
+    @InjectRepository(Cat)
+    private catsRepository: Repository<Cat>
+){}
 
-    private readonly cats: Cat[] = [];
 
-    findAll(): Cat[] {
-        return this.cats;
-    }
+    // private readonly cats: Cat[] = [];
 
-    create(cat: Cat): void {
-        this.cats.push(cat);
-    }
+    findAll(): Promise<Cat[]> {
+        return this.catsRepository.find();
+      }
 
-    findById(id: number): Cat {
-        return this.cats.find(cat => cat.id === id);
-    }
+    // create(cat: Cat): void {
+    //     this.cats.push(cat);
+    // }
 
-    findIndexById(id: number): number {
-        return this.cats.findIndex(cat => cat.id === id);
-    }
+    // findById(id: number): Cat {
+    //     return this.cats.find(cat => cat.id === id);
+    // }
 
-    deleteByIndex(index: number): void {
-        this.cats.splice(index, 1);
-    }
+    // findIndexById(id: number): number {
+    //     return this.cats.findIndex(cat => cat.id === id);
+    // }
 
-    update(index: number, cat: Cat): void {
-        this.cats.splice(index, 1, cat);
-    }
+    // deleteByIndex(index: number): void {
+    //     this.cats.splice(index, 1);
+    // }
+
+    // update(index: number, cat: Cat): void {
+    //     this.cats.splice(index, 1, cat);
+    // }
 
 }

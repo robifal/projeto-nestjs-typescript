@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { Cat } from './cats/cat.entity';
 
 
 @Module({
@@ -14,9 +15,9 @@ import { DataSource } from 'typeorm';
       port: 5432,
       username: 
 'robert_postgre_exemplo_user',
-      password: '123456',
+      password: 'a3heILi6YlgAPDQgGLG1n64NfpUBrUov',
       database: 'robert_postgre_exemplo',
-      entities: [],
+      entities: [Cat],         
       synchronize: true,
       ssl: true,
     }), CatsModule],
