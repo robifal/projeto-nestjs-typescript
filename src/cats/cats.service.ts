@@ -21,17 +21,17 @@ constructor(
     //     this.cats.push(cat);
     // }
 
-    // findById(id: number): Cat {
-    //     return this.cats.find(cat => cat.id === id);
-    // }
+    findById(id: number): Promise<Cat | null> {
+        return this.catsRepository.findOneBy({ id });
+    }
 
     // findIndexById(id: number): number {
     //     return this.cats.findIndex(cat => cat.id === id);
     // }
 
-    // deleteByIndex(index: number): void {
-    //     this.cats.splice(index, 1);
-    // }
+   async remove(id: number): Promise<void>{
+       await this.catsRepository.delete(id);
+    }
 
     // update(index: number, cat: Cat): void {
     //     this.cats.splice(index, 1, cat);

@@ -14,26 +14,27 @@ export class CatsController {
         return this.catsService.findAll();
     }
 
-    // @Get(':id')
-    // findOne(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    //     const gatoEncontrado = this.catsService.findById(id);
-    //     if (gatoEncontrado) {
-    //         res.status(HttpStatus.OK).json(gatoEncontrado);
-    //     } else {
-    //         res.status(HttpStatus.NOT_FOUND).send();
-    //     }
-    // }
+    @Get(':id')
+    async findOne(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+        const gatoEncontrado = await this.catsService.findById(id);
+        if (gatoEncontrado) {
+            res.status(HttpStatus.OK).json(gatoEncontrado);
+        } else {
+            res.status(HttpStatus.NOT_FOUND).send();
+        }
+    }
 
-    // @Delete(':id')
-    // remove(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
-    //     const indexGatoEncontrado = this.catsService.findIndexById(id);
-    //     if (indexGatoEncontrado >= 0) {
-    //         this.catsService.deleteByIndex(indexGatoEncontrado);
-    //         res.status(HttpStatus.NO_CONTENT).send();
-    //     } else {
-    //         res.status(HttpStatus.NOT_FOUND).send();
-    //     }
-    // }
+    @Delete(':id')
+    async remove(@Param('id', ParseIntPipe) id: number, @Res() res: Response) { {
+        const gatoEncontrado = await this.catsService.findById(id);
+            if (gatoEncontrado) {
+                await this.catsService.remove(id);
+                res.status(HttpStatus.NO_CONTENT).send();
+        } else {
+            res.status(HttpStatus.NOT_FOUND).send();
+        }
+            }
+    }
 
     // @Post()
     // create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
