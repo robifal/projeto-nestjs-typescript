@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cat } from './cat.entity';
 import { Repository } from 'typeorm';
+import { CreateCatDto } from './dto/create-cat.dto';
 
 @Injectable()
 export class CatsService{
@@ -17,9 +18,9 @@ constructor(
         return this.catsRepository.find();
       }
 
-    // create(cat: Cat): void {
-    //     this.cats.push(cat);
-    // }
+      create(dto: CreateCatDto): Promise<Cat> {
+        return this.catsRepository.save(dto);
+    }
 
     findById(id: number): Promise<Cat | null> {
         return this.catsRepository.findOneBy({ id });

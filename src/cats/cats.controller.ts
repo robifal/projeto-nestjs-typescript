@@ -36,11 +36,11 @@ export class CatsController {
             }
     }
 
-    // @Post()
-    // create(@Body() createCatDto: CreateCatDto, @Res() res: Response) {
-    //     this.catsService.create(createCatDto);
-    //     res.status(HttpStatus.CREATED).json(createCatDto);
-    // }    
+    @Post()
+    async create(@Body() dto: CreateCatDto, @Res() res: Response) {
+        const cat = await this.catsService.create(dto);
+        res.status(HttpStatus.CREATED).json(cat);
+    }    
 
     // @Put(':id')
     // update(@Param('id', ParseIntPipe) id: number, @Body() cat: Cat, @Res() res: Response) {
